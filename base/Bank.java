@@ -4,13 +4,15 @@ import java.util.Vector;
 
 public class Bank extends Admin implements Serializable{
 
-	public Vector<User> userS = new Vector<User>(4);
+	public Vector<User> userS = new Vector<User>();
 
 	//main function
 	public static void main(String[] args){
 		Bank acc = new Bank();
-		Vector<User> v = null;
-		userS.copyInto(v);
+		Vector<User> v = new Vector<User>();
+		for (User u : acc.userS) {
+			v.add(u);
+		}
 		System.out.println(v);
                 acc.mainMenu(v);
 	}
@@ -24,10 +26,10 @@ public class Bank extends Admin implements Serializable{
 
 	public void initUser()
 	{	
-		userS.add(new User(1234, 22441, new Checking(2000), new Saving(15000), "Brian")); 
-		userS.add(new User(2345, 14145, new Checking(3000), new Saving(20000), "Ivan"));
-		userS.add(new User(3456, 23511, new Checking(4000), new Saving(18000), "Daniel"));
-		userS.add(new User(4567, 12313, new Checking(1210), new Saving(30000), "Leo"));
+		userS.add(new User(12345, 22441, new Checking(2000.00f), new Saving(15000.50f), "Brian")); 
+		userS.add(new User(23456, 14145, new Checking(3000.50f), new Saving(20000.40f), "Ivan"));
+		userS.add(new User(34567, 23511, new Checking(4000.25f), new Saving(18000.45f), "Daniel"));
+		userS.add(new User(45678, 12313, new Checking(1210.30f), new Saving(30000.25f), "Leo"));
 	}
 
 	public void saveUser() 
@@ -74,7 +76,7 @@ public class Bank extends Admin implements Serializable{
 		int pinnum = input.nextInt();
 
 		System.out.println("__________________________________________________________________\n");
-		if(acnum == 0000){
+		if(acnum == 00000){
 			if(pinnum == 12345){
 				this.admin_menu(v);
 			}
@@ -113,7 +115,13 @@ public class Bank extends Admin implements Serializable{
 			System.out.println("\nEnter User pin :");
 			Scanner pi = new Scanner(System.in);                                
 			pin = pi.nextInt();
-			v.add(addu(acnum, name, pin));
+			System.out.println("\nEnter User Saving account balance :");
+                        Scanner sa = new Scanner(System.in);
+                        float savv = sa.nextFloat();
+			System.out.println("\nEnter User Checking account balance :");
+                        Scanner ch = new Scanner(System.in);
+                        float chkk = ch.nextFloat();
+			v.add(addu(acnum, name, pin, savv, chkk));
 			this.admin_menu(v);
 		}
 
@@ -171,7 +179,7 @@ public class Bank extends Admin implements Serializable{
 			if (choice == 1)
 			{
 				System.out.println("How much would you like to deposit?\n");
-                                int dep = input.nextInt();
+                                float dep = input.nextFloat();
                                 u.chk.deposit(dep);
                                 this.userMenu(v, u);
 			}
@@ -206,14 +214,14 @@ public class Bank extends Admin implements Serializable{
 			if (choice == 1)
 			{
 				System.out.println("How much would you like to deposit?\n");
-                                int dep = input.nextInt();
+                                float dep = input.nextFloat();
                                 u.sav.deposit(dep);
                                 this.userMenu(v, u);
 			}
 	
 			else if (choice == 2)
 			{
-				System.out.println("How much would you like to withdraw?\n");
+				System.out.println("How much would you like to withdraw? (int)\n");
                                 int with = input.nextInt();
                                 u.sav.withdraw(with);
                                 this.userMenu(v, u);

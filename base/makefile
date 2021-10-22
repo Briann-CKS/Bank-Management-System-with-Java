@@ -1,8 +1,8 @@
-Menu: User.java Checking.java Saving.java Admin.java Bank.java
+Bank: User.java Checking.java Saving.java Admin.java Bank.java
 	javac User.java Checking.java Saving.java Admin.java Bank.java
 
-run:
-	java bank
+run:	Bank
+	java Bank
 
 clean: 
 	rm -f *.class

@@ -3,20 +3,27 @@ import java.util.Scanner;
 
 public class Saving implements Serializable{
 
-	protected int bal = 0;
-	protected int saving1 = 0;
+	protected float bal = 0.0f;
+	protected float saving1 = 0.0f;
 	protected int with = 0;
 
 	public static void main(String[] args){
 		Saving s = new Saving();
 	}
 
-	public Saving (int amt)
+	public Saving()
+	{
+		this.bal = 0.0f;
+		this.saving1 = 0.0f;
+		this.with = 0;
+	}
+
+	public Saving (float amt)
 	{
 		this.bal = amt;
 	}	
 
-	public int bal(){
+	public float bal(){
 		return bal;
 	}
 	
@@ -30,10 +37,10 @@ public class Saving implements Serializable{
 	}
 	
 
-	public void deposit(int saving1){
+	public void deposit(float saving1){
 		this.saving1 = saving1;
 
-		if(saving1<0){
+		if(saving1<0.0f){
 			System.out.println("The amount you entered is negative\n");
 		}
 

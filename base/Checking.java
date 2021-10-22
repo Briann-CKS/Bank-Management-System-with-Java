@@ -3,26 +3,32 @@ import java.util.Scanner;
 
 public class Checking implements Serializable{
 
-	protected int balance = 0;
-	protected int chk = 0;
+	protected float balance = 0.0f;
+	protected float chk = 0.0f;
 	protected int with = 0;
 
 	public static void main(String[] args){
 		Checking c = new Checking();
 	}
 
-	public Checking(int amt)
+	public Checking()
+	{
+		this.balance = 0.0f;
+		this.chk = 0.0f;
+		this.with = 0;
+	}
+
+	public Checking(float amt)
 	{
 		this.balance = amt;
 	}
 
-	public int bal(){
+	public float bal(){
 		return balance;
 	}
 	
-
 	public void getcBal(){
-		if(balance == 0){
+		if(balance == 0.0f){
 			System.out.println("Checking account is empty!!\n");
 		}
 		else{
@@ -31,9 +37,9 @@ public class Checking implements Serializable{
 	}
 	
 
-	public void deposit(int chk){
+	public void deposit(float chk){
 		this.chk = chk;
-		if(chk < 0){
+		if(chk < 0.0f){
 			System.out.println("Cannot deposit negative ammount\n");
 		}
 		else{

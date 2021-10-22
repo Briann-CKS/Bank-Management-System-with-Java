@@ -52,6 +52,16 @@ public class User implements Serializable
 	public void setAcnum(int acnum){
 		this.acnum = acnum;
 	}
+
+	public void setSav(float savv){
+		Saving newSav = new Saving(savv);
+                this.sav = newSav;
+        }
+
+	public void setChk(float chkk){
+                Checking newChk = new Checking (chkk);
+                this.chk = newChk;
+        }
 	
 
 	public int pin(){
@@ -72,6 +82,11 @@ public class User implements Serializable
 
 	public void userinfo(){
 		System.out.println(this.name+" "+this.acnum+" "+this.pin);
+		System.out.println("Saving balance: ");
+		this.sav.getsBal();
+		System.out.println("Checking balance: ");
+		this.chk.getcBal();
+		System.out.println(" ");
 	}
 }
 
