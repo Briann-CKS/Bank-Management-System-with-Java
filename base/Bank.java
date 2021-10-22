@@ -3,16 +3,53 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Bank extends Admin implements Serializable{
+
+	public Vector<User> userS = new Vector<User>(4);
+
 	//main function
 	public static void main(String[] args){
 		Bank acc = new Bank();
-		Vector v = null;
+		Vector v = userS;
+		System.out.println(v);
+                acc.mainMenu(v);
+	}
 
+	public Bank()
+	{
+		initUser();
+		saveUser();
+		loadUser();
+	}
+
+	public void initUser()
+	{	
+		userS.add(adduser(1234, 22441, new Checking(2000), new Saving(15000), "Brian")); 
+		userS.add(adduser(2345, 14145, new Checking(3000), new Saving(20000), "Ivan"));
+		userS.add(adduser(3456, 23511, new Checking(4000), new Saving(18000), "Daniel"));
+		userS.add(adduser(4567, 12313, new Checking(1210), new Saving(30000), "Leo"));
+	}
+
+	public void saveUser() 
+	{
+		try{
+                        FileOutputStream file=new FileOutputStream("Users.dat");
+                        ObjectOutputStream out=new ObjectOutputStream(file);
+                        out.writeObject(userS);
+                        out.close();
+                        file.close();
+                        } catch(Exception e){
+                                System.out.println("IOException Caught");
+                        }
+	}
+		
+	@Override
+	public void loadUser()
+	{
 		try{
 		FileInputStream file=new FileInputStream("Users.dat");
 		ObjectInputStream in=new ObjectInputStream(file);
-		
-		v=(Vector)in.readObject();
+				
+		userS = (Vector)in.readObject();
 		
 		in.close();
 		}catch(IOException ex){
@@ -20,10 +57,8 @@ public class Bank extends Admin implements Serializable{
 		}catch(ClassNotFoundException ex){
 			System.out.println(ex.getMessage());
 		}
-
-		System.out.println(v);
-		acc.mainMenu(v);
 	}
+		
 
 	// main menu
 	public void mainMenu(Vector v){
@@ -104,7 +139,7 @@ public class Bank extends Admin implements Serializable{
 		else
 		{
 			try{
-			FileOutputStream file=new FileOutputStream("Users.ser");
+			FileOutputStream file=new FileOutputStream("Users.dat");
 			ObjectOutputStream out=new ObjectOutputStream(file);
 			out.writeObject(v);
 			out.close();

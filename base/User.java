@@ -14,6 +14,16 @@ public class User implements Serializable
 	protected String name;
 	
 	protected Vector v = null;
+
+	//public User(int accountNumber, int pIN, Checking checkingAccount,Saving savingAccount, String name) 
+	{ //adduser method
+		super();
+		this.acnum = accountNumber;
+		this.pin = pIN;
+		this.chk = checkingAccount;
+		this.sav = savingAccount;
+		this.name = name;	
+	}
 	
 	public int acnum(){
 		if(acnum == 0){

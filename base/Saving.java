@@ -11,12 +11,15 @@ public class Saving implements Serializable{
 		Saving s = new Saving();
 	}
 
+	public Saving (int amt)
+	{
+		this.bal = amt;
+	}	
 
 	public int bal(){
 		return bal;
 	}
 	
-
 	public void getsBal(){
 		if(bal == 0){
 			System.out.println("The account is empty\n");

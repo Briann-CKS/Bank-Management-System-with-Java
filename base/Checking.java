@@ -11,6 +11,11 @@ public class Checking implements Serializable{
 		Checking c = new Checking();
 	}
 
+	public Checking(int amt)
+	{
+		this.balance = amt;
+	}
+
 	public int bal(){
 		return balance;
 	}
