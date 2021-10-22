@@ -45,6 +45,31 @@ public class Bank extends Admin implements Serializable{
                         }
 	}
 
+	public void saveUserA(User u, Vector v)                 
+        {
+                try{
+			int counter = 0;
+                        FileOutputStream file=new FileOutputStream("Users.dat");
+                        ObjectOutputStream out=new ObjectOutputStream(file);
+                        for(int i=0; i<v.size(); i++){
+                        	User usr = new User();
+                        	usr = (User)v.get(i);
+                        	int acc = usr.acnum();
+                        	int pin = usr.pin();
+				if(u.acnum() == acc){
+        	                        v.set(i, u);
+					break;
+                	        }
+			}
+			out.writeObject(v);
+                        out.close();
+                        file.close();
+		} catch(Exception e){
+                        System.out.println("IOException Caught");
+                }
+        }
+
+
 	@SuppressWarnings("unchecked")		
 	public void loadUser()
 	{
@@ -201,6 +226,7 @@ public class Bank extends Admin implements Serializable{
 
 			else if (choice == 4)
 			{
+				saveUserA(u, v);
 				this.mainMenu(v);
 			}
 		}
@@ -236,6 +262,7 @@ public class Bank extends Admin implements Serializable{
 
 			else if (choice == 4)
 			{
+				saveUserA(u, v);		
 				this.mainMenu(v);
 			}
 		}

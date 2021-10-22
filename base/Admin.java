@@ -21,7 +21,8 @@ public class Admin extends User implements Serializable {
 		u.setSav(savv);
 		u.setChk(chkk);
 		u.userinfo();
-		return u;}	
+		return u;
+	}	
 
 	public void deleteu(int acnum, Vector v){
 		int counter =0;
