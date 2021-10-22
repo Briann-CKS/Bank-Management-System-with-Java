@@ -9,7 +9,8 @@ public class Bank extends Admin implements Serializable{
 	//main function
 	public static void main(String[] args){
 		Bank acc = new Bank();
-		Vector v = userS;
+		Vector<User> v = null;
+		userS.copyInto(v);
 		System.out.println(v);
                 acc.mainMenu(v);
 	}
@@ -23,10 +24,10 @@ public class Bank extends Admin implements Serializable{
 
 	public void initUser()
 	{	
-		userS.add(adduser(1234, 22441, new Checking(2000), new Saving(15000), "Brian")); 
-		userS.add(adduser(2345, 14145, new Checking(3000), new Saving(20000), "Ivan"));
-		userS.add(adduser(3456, 23511, new Checking(4000), new Saving(18000), "Daniel"));
-		userS.add(adduser(4567, 12313, new Checking(1210), new Saving(30000), "Leo"));
+		userS.add(new User(1234, 22441, new Checking(2000), new Saving(15000), "Brian")); 
+		userS.add(new User(2345, 14145, new Checking(3000), new Saving(20000), "Ivan"));
+		userS.add(new User(3456, 23511, new Checking(4000), new Saving(18000), "Daniel"));
+		userS.add(new User(4567, 12313, new Checking(1210), new Saving(30000), "Leo"));
 	}
 
 	public void saveUser() 
@@ -41,8 +42,8 @@ public class Bank extends Admin implements Serializable{
                                 System.out.println("IOException Caught");
                         }
 	}
-		
-	@Override
+
+	@SuppressWarnings("unchecked")		
 	public void loadUser()
 	{
 		try{
@@ -53,7 +54,7 @@ public class Bank extends Admin implements Serializable{
 		
 		in.close();
 		}catch(IOException ex){
-			v=new Vector();
+			userS = new Vector();
 		}catch(ClassNotFoundException ex){
 			System.out.println(ex.getMessage());
 		}

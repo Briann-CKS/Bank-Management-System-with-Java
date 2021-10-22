@@ -12,11 +12,9 @@ public class User implements Serializable
 	protected int acnum=0;
 	protected int pin = 0;
 	protected String name;
-	
-	protected Vector v = null;
 
-	//public User(int accountNumber, int pIN, Checking checkingAccount,Saving savingAccount, String name) 
-	{ //adduser method
+	public User(int accountNumber, int pIN, Checking checkingAccount,Saving savingAccount, String name) 
+	{ 
 		super();
 		this.acnum = accountNumber;
 		this.pin = pIN;
