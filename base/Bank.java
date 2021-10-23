@@ -34,37 +34,39 @@ public class Bank extends Admin implements Serializable{
 	public void saveUser() 
 	{
 		try{
-                        FileOutputStream file=new FileOutputStream("Users.dat");
-                        ObjectOutputStream out=new ObjectOutputStream(file);
-                        out.writeObject(userS);
-                        out.close();
-                        file.close();
-                        } catch(Exception e){
-                                System.out.println("IOException Caught");
-                        }
+                FileOutputStream file=new FileOutputStream("Users.dat");
+                ObjectOutputStream out=new ObjectOutputStream(file);
+                out.writeObject(userS);
+                out.close();
+                file.close();
+		} catch(Exception e){
+		System.out.println(e.getMessage());
+                }
 	}
 
 	public void saveUserA(User u, Vector v)                 
         {
                 try{
-			int counter = 0;
-                        FileOutputStream file=new FileOutputStream("Users.dat");
-                        ObjectOutputStream out=new ObjectOutputStream(file);
-                        for(int i=0; i<v.size(); i++){
-                        	User usr = new User();
-                        	usr = (User)v.get(i);
-                        	int acc = usr.acnum();
-                        	int pin = usr.pin();
-				if(u.acnum() == acc){
-        	                        v.set(i, u);
-					break;
-                	        }
-			}
-			out.writeObject(v);
-                        out.close();
-                        file.close();
+		int counter = 0;
+                FileOutputStream file=new FileOutputStream("Users.dat");
+                ObjectOutputStream out=new ObjectOutputStream(file);
+                for(int i=0; i<v.size(); i++)
+		{
+              		User usr = new User();
+        	     	usr = (User)v.get(i);
+                 	int acc = usr.acnum();
+                        int pin = usr.pin();
+			if(u.acnum() == acc)
+			{
+        	        	v.set(i, u);
+				break;
+                	}
+		}
+		out.writeObject(v);
+                out.close();
+                file.close();
 		} catch(Exception e){
-                        System.out.println("IOException Caught");
+                        System.out.println(e.getMessage());
                 }
         }
 
@@ -79,10 +81,10 @@ public class Bank extends Admin implements Serializable{
 		userS = (Vector)in.readObject();
 		
 		in.close();
-		}catch(IOException ex){
+		}catch(IOException e){
 			userS = new Vector();
-		}catch(ClassNotFoundException ex){
-			System.out.println(ex.getMessage());
+		}catch(ClassNotFoundException e){
+			System.out.println(e.getMessage());
 		}
 	}
 		
@@ -123,72 +125,74 @@ public class Bank extends Admin implements Serializable{
 	// admin menu
 	public void admin_menu(Vector v){
                 int choice;
+		boolean keep_going = true;
 		Admin a = new Admin();
-		System.out.println("Welcome to the Admin Menu");
-                System.out.println("\nEnter Choice \n1. Add User\n2. Delete User\n3. List User\n4. Apply Interest\n5. Exit\n");
-                Scanner input = new Scanner(System.in);
-                choice = input.nextInt();
+
+		while(keep_going)
+		{
+			System.out.println("Welcome to the Admin Menu");
+                	System.out.println("\nEnter Choice \n1. Add User\n2. Delete User\n3. List User\n4. Apply Interest\n5. Exit\n");
+                	Scanner input = new Scanner(System.in);
+                	choice = input.nextInt();
 		
-		if (choice == 1)
-		{
-			System.out.println("\nEnter User Account number :");
-			Scanner acn = new Scanner(System.in);
-			acnum = acn.nextInt();
-			System.out.println("\nEnter User name :");
-			Scanner nam = new Scanner(System.in);
-			name = nam.nextLine();
-			System.out.println("\nEnter User pin :");
-			Scanner pi = new Scanner(System.in);                                
-			pin = pi.nextInt();
-			System.out.println("\nEnter User Saving account balance :");
-                        Scanner sa = new Scanner(System.in);
-                        float savv = sa.nextFloat();
-			System.out.println("\nEnter User Checking account balance :");
-                        Scanner ch = new Scanner(System.in);
-                        float chkk = ch.nextFloat();
-			v.add(addu(acnum, name, pin, savv, chkk));
-			this.admin_menu(v);
-		}
-
-		else if (choice == 2)
-		{
-			System.out.println("\nEnter User account number to be deleted :");
-			acnum = input.nextInt();
-			deleteu(acnum, v);
-			this.admin_menu(v);
-		}
-
-		else if (choice == 3)
-		{
-			listu(v);
-			this.admin_menu(v);
-		}
-
-		else if (choice == 4)
-		{
-			addinterest(v);
-			this.admin_menu(v);
-		}
-
-		else if (choice == 5)
-		{
-			try{
-			FileOutputStream file=new FileOutputStream("Users.dat");
-			ObjectOutputStream out=new ObjectOutputStream(file);
-			out.writeObject(v);
-			out.close();
-			file.close();
-			} catch(Exception e){
-				System.out.println("IOException Caught");
+			if (choice == 1)
+			{
+				System.out.println("\nEnter User Account number :");
+				Scanner acn = new Scanner(System.in);
+				acnum = acn.nextInt();
+				System.out.println("\nEnter User name :");
+				Scanner nam = new Scanner(System.in);
+				name = nam.nextLine();
+				System.out.println("\nEnter User pin :");
+				Scanner pi = new Scanner(System.in);                                
+				pin = pi.nextInt();
+				System.out.println("\nEnter User Saving account balance :");
+                	        Scanner sa = new Scanner(System.in);
+                       		float savv = sa.nextFloat();
+				System.out.println("\nEnter User Checking account balance :");
+                        	Scanner ch = new Scanner(System.in);
+                        	float chkk = ch.nextFloat();
+				v.add(addu(acnum, name, pin, savv, chkk));
 			}
-		
-			System.exit(0);
-		}
 
-		else
-		{
-			System.out.println("Not a valid option!");
-			System.exit(0);
+			else if (choice == 2)
+			{
+				System.out.println("\nEnter User account number to be deleted :");
+				acnum = input.nextInt();
+				deleteu(acnum, v);
+			}
+
+			else if (choice == 3)
+			{
+				listu(v);
+			}
+	
+			else if (choice == 4)
+			{
+				addinterest(v);
+			}
+	
+			else if (choice == 5)
+			{
+				try{
+				FileOutputStream file=new FileOutputStream("Users.dat");
+				ObjectOutputStream out=new ObjectOutputStream(file);
+				out.writeObject(v);
+				out.close();
+				file.close();
+				} catch(Exception e){
+					System.out.println("IOException Caught");
+				}
+				keep_going = false;
+				System.exit(0);
+			}
+
+			else
+			{
+				System.out.println("Not a valid option!");
+				keep_going = false;
+				System.exit(0);
+			}
 		}
 	}
 
