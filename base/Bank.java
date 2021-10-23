@@ -13,7 +13,6 @@ public class Bank extends Admin implements Serializable{
 		for (User u : acc.userS) {
 			v.add(u);
 		}
-		System.out.println(v);
                 acc.mainMenu(v);
 	}
 
@@ -125,6 +124,7 @@ public class Bank extends Admin implements Serializable{
 	public void admin_menu(Vector v){
                 int choice;
 		Admin a = new Admin();
+		System.out.println("Welcome to the Admin Menu");
                 System.out.println("\nEnter Choice \n1. Add User\n2. Delete User\n3. List User\n4. Apply Interest\n5. Exit\n");
                 Scanner input = new Scanner(System.in);
                 choice = input.nextInt();
@@ -170,7 +170,7 @@ public class Bank extends Admin implements Serializable{
 			this.admin_menu(v);
 		}
 
-		else
+		else if (choice == 5)
 		{
 			try{
 			FileOutputStream file=new FileOutputStream("Users.dat");
@@ -184,13 +184,20 @@ public class Bank extends Admin implements Serializable{
 		
 			System.exit(0);
 		}
+
+		else
+		{
+			System.out.println("Not a valid option!");
+			System.exit(0);
+		}
 	}
 
 	// user menu
 	public void userMenu(Vector v, User u){
                 int acType;
                 int choice;
-
+		
+		System.out.println("Welcome "+u.name+"!");
                 System.out.println("\nEnter Choice\n1. Checking\n2. Savings\n3. Exit\n");
                 Scanner input = new Scanner(System.in);
                 acType = input.nextInt();
@@ -219,7 +226,7 @@ public class Bank extends Admin implements Serializable{
 
 			else if (choice == 3)
 			{
-				System.out.println("Current cheking balance :- \n");
+				System.out.println("Current checking balance :- \n");
                                 u.chk.getcBal();
                                 this.userMenu(v, u);
 			}
@@ -227,11 +234,17 @@ public class Bank extends Admin implements Serializable{
 			else if (choice == 4)
 			{
 				saveUserA(u, v);
-				this.mainMenu(v);
+				this.userMenu(v,u);
+			}
+			
+			else
+			{
+				System.out.println("Not a valid option!");
+				this.userMenu(v,u);
 			}
 		}
 
-		if(acType == 2) 
+		else if(acType == 2) 
 		{
 			System.out.println("\nSavings account : \n");
                         System.out.println("Enter Choice\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Exit\n");
@@ -263,9 +276,26 @@ public class Bank extends Admin implements Serializable{
 			else if (choice == 4)
 			{
 				saveUserA(u, v);		
-				this.mainMenu(v);
+				this.userMenu(v,u);
 			}
+			
+			else
+                        {       
+                                System.out.println("Not a valid option!");
+                                this.userMenu(v,u);
+                        }
+
 		}
+		else if (acType == 3)
+                {
+			System.exit(0);
+                }
+
+                else
+                {
+                        System.out.println("Not a valid option!");
+                        System.exit(0);
+                }
 	}
 }
 
