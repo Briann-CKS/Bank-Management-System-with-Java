@@ -18,8 +18,6 @@ public class Bank extends Admin implements Serializable{
 
 	public Bank()
 	{
-		initUser();
-		saveUser();
 		loadUser();
 	}
 
@@ -200,106 +198,104 @@ public class Bank extends Admin implements Serializable{
 	public void userMenu(Vector v, User u){
                 int acType;
                 int choice;
-		
-		System.out.println("Welcome "+u.name+"!");
-                System.out.println("\nEnter Choice\n1. Checking\n2. Savings\n3. Exit\n");
-                Scanner input = new Scanner(System.in);
-                acType = input.nextInt();
+		boolean keep_going = true;
 
-		if (acType == 1)
-		{
-			System.out.println("\nChecking account : \n");
-                        System.out.println("Enter Choice\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Exit\n");
-                        choice = input.nextInt();
-			
-			if (choice == 1)
-			{
-				System.out.println("How much would you like to deposit?\n");
-                                float dep = input.nextFloat();
-                                u.chk.deposit(dep);
-                                this.userMenu(v, u);
-			}
-			
-			else if (choice == 2)
-			{
-				System.out.println("How much would you like to withdraw?\n");
-                                int with = input.nextInt();
-                                u.chk.withdraw(with);
-                                this.userMenu(v, u);
-			}
+		while(keep_going)
+		{	
+			System.out.println("Welcome "+u.name+"!");
+	                System.out.println("\nEnter Choice\n1. Checking\n2. Savings\n3. Exit\n");
+        	        Scanner input = new Scanner(System.in);
+                	acType = input.nextInt();
 
-			else if (choice == 3)
+			if (acType == 1)
 			{
-				System.out.println("Current checking balance :- \n");
-                                u.chk.getcBal();
-                                this.userMenu(v, u);
-			}
-
-			else if (choice == 4)
-			{
-				saveUserA(u, v);
-				this.userMenu(v,u);
-			}
+				System.out.println("\nChecking account : \n");
+                        	System.out.println("Enter Choice\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Exit\n");
+                       		choice = input.nextInt();
 			
-			else
-			{
-				System.out.println("Not a valid option!");
-				this.userMenu(v,u);
-			}
-		}
-
-		else if(acType == 2) 
-		{
-			System.out.println("\nSavings account : \n");
-                        System.out.println("Enter Choice\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Exit\n");
-                        choice = input.nextInt();
+				if (choice == 1)
+				{
+					System.out.println("How much would you like to deposit?\n");
+                        	        float dep = input.nextFloat();
+                                	u.chk.deposit(dep);
+				}
 			
-			if (choice == 1)
-			{
-				System.out.println("How much would you like to deposit?\n");
-                                float dep = input.nextFloat();
-                                u.sav.deposit(dep);
-                                this.userMenu(v, u);
-			}
+				else if (choice == 2)
+				{
+					System.out.println("How much would you like to withdraw?\n");
+                                	int with = input.nextInt();
+                                	u.chk.withdraw(with);
+				}
+
+				else if (choice == 3)
+				{
+					System.out.println("Current checking balance :- \n");
+                	                u.chk.getcBal();
+				}
+
+				else if (choice == 4)
+				{
+					saveUserA(u, v);
+				}
+			
+				else
+				{
+					System.out.println("Not a valid option!");
+				}
+			}	
 	
-			else if (choice == 2)
+			else if(acType == 2) 
 			{
-				System.out.println("How much would you like to withdraw? (int)\n");
-                                int with = input.nextInt();
-                                u.sav.withdraw(with);
-                                this.userMenu(v, u);
-			}
-
-			else if (choice == 3)
-			{
-				System.out.println("Current savings balance :- \n");
-                                u.sav.getsBal();
-                                this.userMenu(v, u);
-			}
-
-			else if (choice == 4)
-			{
-				saveUserA(u, v);		
-				this.userMenu(v,u);
-			}
+				System.out.println("\nSavings account : \n");
+                        	System.out.println("Enter Choice\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Exit\n");
+                        	choice = input.nextInt();
 			
-			else
-                        {       
-                                System.out.println("Not a valid option!");
-                                this.userMenu(v,u);
-                        }
+				if (choice == 1)
+				{
+					System.out.println("How much would you like to deposit?\n");
+                        	        float dep = input.nextFloat();
+                                	u.sav.deposit(dep);
+				}
+	
+				else if (choice == 2)
+				{
+					System.out.println("How much would you like to withdraw? (int)\n");
+                        	        int with = input.nextInt();
+                                	u.sav.withdraw(with);
+				}
 
+				else if (choice == 3)
+				{
+					System.out.println("Current savings balance :- \n");
+                                	u.sav.getsBal();
+				}
+
+				else if (choice == 4)
+				{
+					saveUserA(u, v);		
+				}
+			
+				else
+                        	{       
+                                	System.out.println("Not a valid option!");
+                        	}
+
+			}
+			else if (acType == 3)
+                	{
+				saveUserA(u,v);
+				keep_going = false;
+				System.exit(0);
+        	        }
+
+                	else
+               		{
+                        	System.out.println("Not a valid option!");
+				saveUserA(u,v);
+				keep_going = false;
+                        	System.exit(0);
+                	}
 		}
-		else if (acType == 3)
-                {
-			System.exit(0);
-                }
-
-                else
-                {
-                        System.out.println("Not a valid option!");
-                        System.exit(0);
-                }
 	}
 }
 
