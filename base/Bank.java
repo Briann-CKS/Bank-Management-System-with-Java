@@ -4,42 +4,16 @@ import java.util.Vector;
 
 public class Bank extends Admin implements Serializable{
 
-	public Vector<User> userS = new Vector<User>();
-
+	public static Vector<User> v = new Vector<User>();
 	//main function
 	public static void main(String[] args){
 		Bank acc = new Bank();
-		Vector<User> v = new Vector<User>();
-		for (User u : acc.userS) {
-			v.add(u);
-		}
                 acc.mainMenu(v);
 	}
 
 	public Bank()
 	{
 		loadUser();
-	}
-
-	public void initUser()
-	{	
-		userS.add(new User(12345, 22441, new Checking(2000.00f), new Saving(15000.50f), "Brian")); 
-		userS.add(new User(23456, 14145, new Checking(3000.50f), new Saving(20000.40f), "Ivan"));
-		userS.add(new User(34567, 23511, new Checking(4000.25f), new Saving(18000.45f), "Daniel"));
-		userS.add(new User(45678, 12313, new Checking(1210.30f), new Saving(30000.25f), "Leo"));
-	}
-
-	public void saveUser() 
-	{
-		try{
-                FileOutputStream file=new FileOutputStream("Users.dat");
-                ObjectOutputStream out=new ObjectOutputStream(file);
-                out.writeObject(userS);
-                out.close();
-                file.close();
-		} catch(Exception e){
-		System.out.println(e.getMessage());
-                }
 	}
 
 	public void saveUserA(User u, Vector v)                 
@@ -76,11 +50,11 @@ public class Bank extends Admin implements Serializable{
 		FileInputStream file=new FileInputStream("Users.dat");
 		ObjectInputStream in=new ObjectInputStream(file);
 				
-		userS = (Vector)in.readObject();
+		v = (Vector)in.readObject();
 		
 		in.close();
 		}catch(IOException e){
-			userS = new Vector();
+			v = new Vector();
 		}catch(ClassNotFoundException e){
 			System.out.println(e.getMessage());
 		}
@@ -95,7 +69,7 @@ public class Bank extends Admin implements Serializable{
 		System.out.println("Account No. :- ");
 		Scanner input = new Scanner(System.in);
 		int acnum  = input.nextInt();
-		
+
 		System.out.println("Pin No. :- ");
 		int pinnum = input.nextInt();
 
@@ -111,13 +85,14 @@ public class Bank extends Admin implements Serializable{
 			usr = (User)v.get(i);
 			int acc = usr.acnum();
 			int pin = usr.pin();
-		
+
 			if(acc == acnum){
 				if(pin == pinnum){
 					this.userMenu(v, usr);
 				}
 			}
 		}
+                System.out.println("No valid user with this account!");
 	}
 
 	// admin menu
@@ -223,7 +198,7 @@ public class Bank extends Admin implements Serializable{
 				else if (choice == 2)
 				{
 					System.out.println("How much would you like to withdraw?\n");
-                                	int with = input.nextInt();
+                                	float with = input.nextFloat();
                                 	u.chk.withdraw(with);
 				}
 
@@ -259,8 +234,8 @@ public class Bank extends Admin implements Serializable{
 	
 				else if (choice == 2)
 				{
-					System.out.println("How much would you like to withdraw? (int)\n");
-                        	        int with = input.nextInt();
+					System.out.println("How much would you like to withdraw?\n");
+                        	        float with = input.nextFloat();
                                 	u.sav.withdraw(with);
 				}
 
@@ -277,7 +252,7 @@ public class Bank extends Admin implements Serializable{
 			
 				else
                         	{       
-                                	System.out.println("Not a valid option!");
+					System.out.println("Not a valid option!");
                         	}
 
 			}

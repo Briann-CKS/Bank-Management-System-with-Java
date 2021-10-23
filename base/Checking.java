@@ -5,7 +5,7 @@ public class Checking implements Serializable{
 
 	protected float balance = 0.0f;
 	protected float chk = 0.0f;
-	protected int with = 0;
+	protected float with = 0.0f;
 
 	public static void main(String[] args){
 		Checking c = new Checking();
@@ -15,7 +15,7 @@ public class Checking implements Serializable{
 	{
 		this.balance = 0.0f;
 		this.chk = 0.0f;
-		this.with = 0;
+		this.with = 0.0f;
 	}
 
 	public Checking(float amt)
@@ -32,7 +32,7 @@ public class Checking implements Serializable{
 			System.out.println("Checking account is empty!!\n");
 		}
 		else{
-			System.out.println("$ "+this.balance);
+			System.out.format("$ %.2f%n", this.balance);
 		}
 	}
 	
@@ -47,12 +47,12 @@ public class Checking implements Serializable{
 		}
 	}
 	
-	public void withdraw(int with){
+	public void withdraw(float with){
 		this.with = with;
 		if(with>balance){
 			System.out.println("Balance too low !!!\n");
 		}
-		else if(with<0){
+		else if(with<0.0f){
 			System.out.println("Cannot withdraw negative ammount!!\n");
 		}
 		else{

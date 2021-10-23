@@ -81,7 +81,7 @@ public class User implements Serializable
 	
 
 	public void userinfo(){
-		System.out.println(this.name+" "+this.acnum+" "+this.pin);
+		System.out.println(this.name+"\nAccount Number: "+this.acnum+"\nPin Number: "+this.pin);
 		System.out.println("Saving balance: ");
 		this.sav.getsBal();
 		System.out.println("Checking balance: ");

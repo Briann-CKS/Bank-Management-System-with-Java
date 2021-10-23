@@ -5,7 +5,7 @@ public class Saving implements Serializable{
 
 	protected float bal = 0.0f;
 	protected float saving1 = 0.0f;
-	protected int with = 0;
+	protected float with = 0.0f;
 
 	public static void main(String[] args){
 		Saving s = new Saving();
@@ -15,7 +15,7 @@ public class Saving implements Serializable{
 	{
 		this.bal = 0.0f;
 		this.saving1 = 0.0f;
-		this.with = 0;
+		this.with = 0.0f;
 	}
 
 	public Saving (float amt)
@@ -28,11 +28,11 @@ public class Saving implements Serializable{
 	}
 	
 	public void getsBal(){
-		if(bal == 0){
+		if(bal == 0.0f){
 			System.out.println("The account is empty\n");
 		}
 		else{
-			System.out.println("$ "+this.bal);
+			System.out.format("$ %.2f%n", this.bal);
 		}
 	}
 	
@@ -50,14 +50,14 @@ public class Saving implements Serializable{
 	}
 	
 	
-	public void withdraw(int with){
+	public void withdraw(float with){
 		this.with = with;
 
 		if(with>bal){
 			System.out.println("Account balance is low!!\n");
 		}
 	
-		else if(with<0){
+		else if(with<0.0f){
 			System.out.println("Cannot withdraw negative ammount!!\n");
 		}
 		
