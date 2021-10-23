@@ -56,8 +56,8 @@ public class Admin extends User implements Serializable {
 			User u = new User();
 			u = (User)v.get(i);
 			float sbal = u.sav.bal();
-			float nbal = sbal*(1+(interest*(float)time/12));
-			u.sav.deposit(nbal);
+			float depo = sbal*(1+(interest*((float)time/12))) - sbal;
+			u.sav.deposit(depo);
 		}
 	}
 }
