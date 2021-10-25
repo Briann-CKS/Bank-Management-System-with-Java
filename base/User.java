@@ -9,33 +9,33 @@ public class User implements Serializable
 	protected Saving sav; 
 	protected Checking chk;
 	
-	protected int acnum=0;
+	protected int accnum=0;
 	protected int pin = 0;
 	protected String name;
 
 	public User(int accountNumber, int pIN, Checking checkingAccount,Saving savingAccount, String name) 
 	{ 
 		super();
-		this.acnum = accountNumber;
+		this.accnum = accountNumber;
 		this.pin = pIN;
 		this.chk = checkingAccount;
 		this.sav = savingAccount;
 		this.name = name;	
 	}
 	
-	public int acnum(){
-		if(acnum == 0){
+	public int accnum(){
+		if(accnum == 0){
 			System.out.println("Unknown Account number!!!!\n");
 			return 0;
 		}
 		else{
-			return this.acnum;
+			return this.accnum;
 		}
 	}	
 	
 
 	public static void main(String[] args){
-		User u = new User();
+		User user = new User();
 	}
 	
 
@@ -50,7 +50,7 @@ public class User implements Serializable
 	}
 	
 	public void setAcnum(int acnum){
-		this.acnum = acnum;
+		this.accnum = acnum;
 	}
 
 	public void setSav(float savv){
@@ -59,8 +59,8 @@ public class User implements Serializable
         }
 
 	public void setChk(float chkk){
-                Checking newChk = new Checking (chkk);
-                this.chk = newChk;
+                Checking newCheck = new Checking (chkk);
+                this.chk = newCheck;
         }
 	
 
@@ -81,7 +81,7 @@ public class User implements Serializable
 	
 
 	public void userinfo(){
-		System.out.println(this.name+"\nAccount Number: "+this.acnum+"\nPin Number: "+this.pin);
+		System.out.println(this.name+"\nAccount Number: "+this.accnum+"\nPin Number: "+this.pin);
 		System.out.println("Saving balance: ");
 		this.sav.getsBal();
 		System.out.println("Checking balance: ");

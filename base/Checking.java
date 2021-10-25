@@ -18,9 +18,9 @@ public class Checking implements Serializable{
 		this.with = 0.0f;
 	}
 
-	public Checking(float amt)
+	public Checking(float amount)
 	{
-		this.balance = amt;
+		this.balance = amount;
 	}
 
 	public float bal(){
@@ -47,8 +47,8 @@ public class Checking implements Serializable{
 		}
 	}
 	
-	public void withdraw(float with){
-		this.with = with;
+	public void withdraw(float withd){
+		this.with = withd;
 		if(with>balance){
 			System.out.println("Balance too low !!!\n");
 		}

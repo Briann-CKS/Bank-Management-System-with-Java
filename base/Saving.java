@@ -18,9 +18,9 @@ public class Saving implements Serializable{
 		this.with = 0.0f;
 	}
 
-	public Saving (float amt)
+	public Saving (float amount)
 	{
-		this.bal = amt;
+		this.bal = amount;
 	}	
 
 	public float bal(){
@@ -37,8 +37,8 @@ public class Saving implements Serializable{
 	}
 	
 
-	public void deposit(float saving1){
-		this.saving1 = saving1;
+	public void deposit(float saving){
+		this.saving1 = saving;
 
 		if(saving1<0.0f){
 			System.out.println("The amount you entered is negative\n");
